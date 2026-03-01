@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You 💖</title>
+  <!-- โหลดฟอนต์น่ารักๆ จาก Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Mali:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <!-- เชื่อมไฟล์ CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- พื้นหลังหัวใจลอย -->
+  <div id="hearts-container"></div>
+
+  <!-- เครื่องเล่นเพลง (Music Player UI) -->
+  <div class="music-player" id="music-player" onclick="toggleMusic()" title="เปิด/ปิดเพลง">
+    <div class="music-icon" id="music-icon">🎵</div>
+  </div>
+  <!-- ปุ่มเพิ่ม/ลดเสียง -->
+  <div class="volume-controls" id="volume-controls">
+    <button onclick="changeVolume(-0.1)" title="ลดเสียง">🔉</button>
+    <button onclick="changeVolume(0.1)" title="เพิ่มเสียง">🔊</button>
+  </div>
+
+  <!-- ไฟล์เพลง (ต้องมีไฟล์ชื่อ song.mp3 อยู่ในโฟลเดอร์เดียวกัน หรือใช้ลิงก์ไฟล์ตรงๆ จากเซิร์ฟเวอร์) -->
+  <audio id="bgMusic" loop>
+    <!-- ตัวอย่าง: ถ้าคุณวางไฟล์ในโฟลเดอร์เดียวกันให้ใช้ "song.mp3" -->
+    <!-- <source src="song.mp3" type="audio/mpeg"> -->
+
+    <!-- หรือถ้าจะเรียกจาก GitHub ให้ใช้ลิงก์ raw แบบนี้ -->
+
+    <source
+      src="https://raw.githubusercontent.com/face12345678/pp.facem/main/Z9%20-%20%E0%B8%AA%E0%B8%82%E0%B8%AA%E0%B8%99%E0%B8%95%E0%B8%A7%E0%B8%99%E0%B9%80%E0%B8%81%E0%B8%94%E0%B8%99%E0%B8%B0%E0%B9%80%E0%B8%94%E0%B8%81%E0%B8%94%E0%B8%AD.mp3"
+      type="audio/mpeg">
+
+  </audio>
+
+  <div class="container">
+    <!-- หัวข้อ -->
+    <h1 class="title">มีอะไรจะให้ดู... กดที่ซองจดหมายสิ! 💌</h1>
+
+    <!-- ซองจดหมาย -->
+    <div class="envelope-wrapper" onclick="openEnvelope()" title="คลิกเพื่อเปิด">
+      <div class="envelope" id="envelope">
+        <div class="flap-top"></div>
+        <div class="flap-left"></div>
+        <div class="flap-right"></div>
+        <!-- ข้อความข้างในซอง (แก้ไขข้อความได้เลย) -->
+        <div class="letter" id="letter">
+          <h2>H.B.D 💕</h2>
+          <p>H.B.D<br>รักนะ<br>อ้วนนน! 🥺</p>
+          <p class="signature">- รักนะ จุ๊บๆ -</p>
+        </div>
+        <div class="flap-bottom"></div>
+      </div>
+    </div>
+
+    <!-- หัวข้อแกลลอรี่ -->
+    <h2 class="gallery-title" style="display:none;">H.B.D</h2>
+    <h2 class="gallery-title" style="display:none;">รูปปปปปปปปปปปปปปป 📸👇</h2>
+
+
+    <div class="gallery" id="gallery">
+
+      <!-- รูปที่ 1 -->
+      <div class="polaroid" style="--rotation: -5deg;">
+        <img src="https://github.com/face12345678/pp.facem/blob/main/a.jpg?raw=true" alt="Photo 1">
+        <div class="caption">H.B.D 😊</div> <!-- เปลี่ยนแคปชั่นตรงนี้ -->
+      </div>
+
+      <!-- รูปที่ 2 -->
+      <div class="polaroid" style="--rotation: 7deg;">
+        <img src="https://github.com/face12345678/pp.facem/blob/main/aaa.jpg?raw=true" alt="Photo 2">
+        <div class="caption">H.B.D 🚗</div>
+      </div>
+
+      <!-- รูปที่ 3 -->
+      <div class="polaroid" style="--rotation: -3deg;">
+        <img src="https://github.com/face12345678/pp.facem/blob/main/%E0%B8%9F.jpg?raw=true" alt="Photo 3">
+        <div class="caption">H.B.D 😘</div>
+      </div>
+
+      <!-- รูปที่ 4 -->
+      <div class="polaroid" style="--rotation: 6deg;">
+        <img src="https://github.com/face12345678/pp.facem/blob/main/aa.jpg?raw=true" alt="Photo 4">
+        <div class="caption">H.B.D ❤️</div>
+      </div>
+
+      <!-- สามารถ copy <div class="polaroid">...</div> ไปวางเพิ่มรูปได้เรื่อยๆ -->
+
+    </div>
+  </div>
+
+  <!-- คำแนะนำ (จะหายไปเมื่อกดเปิดซอง) -->
+  <div class="helper-text" id="helper-text">👇 ลองจิ้มที่ซองจดหมายดูสิ!</div>
+
+  <!-- เชื่อมไฟล์ JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,394 @@
+:root {
+    --bg-color: #ffe6e6;
+    --envelope-color: #ff99aa;
+    --flap-color: #ff8099;
+    --letter-bg: #fffcfc;
+    --text-color: #d6336c;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #fdfbfb 0%, #fce3ec 100%);
+    min-height: 100vh;
+    font-family: 'Mali', cursive;
+    color: var(--text-color);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* เอฟเฟกต์หัวใจลอย */
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 20px;
+    animation: floatUp linear forwards, sway 2s ease-in-out infinite alternate;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 5px rgba(255, 105, 135, 0.4));
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-120vh) scale(1.5) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+@keyframes sway {
+    0% {
+        margin-left: -30px;
+    }
+
+    100% {
+        margin-left: 30px;
+    }
+}
+
+/* ส่วนหลัก */
+.container {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.title {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 50px;
+    animation: bounceText 2s infinite;
+    text-shadow: 2px 2px 4px rgba(255, 153, 170, 0.5);
+    background: -webkit-linear-gradient(45deg, #ff4081, #ff9100);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+}
+
+@keyframes bounceText {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* ซองจดหมาย */
+.envelope-wrapper {
+    position: relative;
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: transform 0.3s;
+}
+
+.envelope-wrapper:hover {
+    transform: scale(1.03) rotate(-1deg);
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--envelope-color);
+    border-radius: 10px;
+    box-shadow: 0 15px 30px rgba(255, 105, 135, 0.2);
+}
+
+.flap-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 110px solid #ff6680;
+    z-index: 5;
+    transform-origin: top;
+    transition: transform 0.6s ease-in-out, z-index 0.6s;
+}
+
+.flap-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 110px solid transparent;
+    border-bottom: 110px solid transparent;
+    border-left: 160px solid #ff8099;
+    z-index: 4;
+}
+
+.flap-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 110px solid transparent;
+    border-bottom: 110px solid transparent;
+    border-right: 160px solid #ff8099;
+    z-index: 4;
+}
+
+.flap-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 120px solid #ff99aa;
+    z-index: 6;
+    /* ด้านหน้าสุดเสมอ */
+}
+
+/* กระดาษจดหมาย */
+.letter {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 300px;
+    height: 190px;
+    background-color: var(--letter-bg);
+    border-radius: 8px;
+    padding: 25px 20px;
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.8s;
+    text-align: center;
+    border: 2px dashed #ffb3c6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.envelope.open .flap-top {
+    transform: rotateX(180deg);
+    z-index: 1;
+    /* ตกไปอยู่หลังสุดเมื่อเปิด */
+}
+
+.envelope.open .letter {
+    transform: translateY(-160px);
+    z-index: 5;
+    /* เลื่อนขึ้นมาอยู่ระหว่าง flap-top กับ flap-bottom */
+    height: auto;
+    min-height: 200px;
+}
+
+.letter h2 {
+    font-family: 'Kanit', sans-serif;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: #d81b60;
+}
+
+.letter p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 15px 0;
+    color: #555;
+}
+
+.signature {
+    font-weight: 600;
+    color: #d81b60;
+    margin-top: 15px !important;
+    font-family: 'Kanit', sans-serif;
+}
+
+/* แกลลอรี่รูปภาพ */
+.gallery-title {
+    margin-top: 30px;
+    font-size: 26px;
+    transition: opacity 1s, transform 1s;
+    opacity: 0;
+    transform: translateY(20px);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+    display: block !important;
+}
+
+.gallery {
+    display: flex;
+
+    justify-content: center;
+    gap: 25px;
+    max-width: 1000px;
+    margin-top: 30px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s;
+}
+
+.gallery.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* รูปแบบโพราลอยด์ */
+.polaroid {
+    background: white;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    transform: rotate(var(--rotation)) translateY(0);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, z-index 0s;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.polaroid:hover {
+    transform: scale(1.1) rotate(0deg) translateY(-10px) !important;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+/* ขนาดรูปภาพ */
+.polaroid img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 2px;
+    background-color: #fce4ec;
+    border: 1px solid #ffe6e6;
+}
+
+.caption {
+    font-family: 'Mali', cursive;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 17px;
+    color: #444;
+    font-weight: 500;
+}
+
+/* คำแนะนำ (สำหรับ User) */
+.helper-text {
+    position: fixed;
+    bottom: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ปุ่มเครื่องเล่นเพลง */
+.music-player {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(255, 105, 135, 0.4);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border: 2px solid #ff99aa;
+}
+
+.music-player:hover {
+    transform: scale(1.15) rotate(5deg);
+    background: white;
+    box-shadow: 0 6px 20px rgba(255, 105, 135, 0.6);
+}
+
+/* ปุ่มฟังชั่นปรับเสียง */
+.volume-controls {
+    position: fixed;
+    top: 80px; /* ใต้ปุ่มเล่นเพลง */
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1000;
+}
+
+.volume-controls button {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid #ff99aa;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.volume-controls button:hover {
+    transform: scale(1.1);
+    background: white;
+}
+
+.music-icon {
+    font-size: 22px;
+    transform-origin: center;
+}
+
+/* เอฟเฟกต์หมุนตอนเพลงเล่น */
+.music-player.playing .music-icon {
+    animation: rotateMusic 4s linear infinite;
+}
+
+@keyframes rotateMusic {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
